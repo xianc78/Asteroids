@@ -20,7 +20,9 @@ def main():
 	clock = pygame.time.Clock()
 	
 	player = Player(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
-	current_level = levels.level1(player)
+	level_list = [levels.level1, levels.level2]
+	levelno = 1
+	current_level = level_list[levelno - 1](player)
 	player.level = current_level
 	
 	while True:
@@ -82,10 +84,15 @@ def main():
 		for bullet in current_level.bullet_list:
 			bullet.update()
 		if len(current_level.asteroid_list) == 0:
+			levelno += 1
 			update_screen()
 			pygame.display.update()
-			pygame.quit()
-			sys.exit()
+			if levelno > len(level_list):
+				pygame.quit()
+				sys.exit()
+			else:
+				current_level = level_list[levelno - 1](player)
+				player.level = current_level
 		pygame.display.update()
 		clock.tick(constants.FPS)
 		

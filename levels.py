@@ -8,6 +8,9 @@ class level:
 	asteroid_list = []
 	bullet_list = []
 	
+	def __init__(self, player):
+		self.player = player
+	
 class level1(level):
 	def __init__(self, player):
 		'''
@@ -16,5 +19,12 @@ class level1(level):
 		'''
 		self.player = player
 		for i in range(0, 5):
+			self.asteroid_list.append(Asteroid(random.randint(0, constants.SCREEN_WIDTH - 43), random.randint(0, constants.SCREEN_HEIGHT - 43), 
+			random.choice([2, -2]), random.choice([2, -2]), self))
+			
+class level2(level):
+	def __init__(self, player):
+		self.player = player
+		for i in range(0, 7):
 			self.asteroid_list.append(Asteroid(random.randint(0, constants.SCREEN_WIDTH - 43), random.randint(0, constants.SCREEN_HEIGHT - 43), 
 			random.choice([2, -2]), random.choice([2, -2]), self))
