@@ -30,6 +30,7 @@ class Player:
 		self.rect.y = y
 		self.change_x = 0
 		self.change_y = 0
+		self.lives = 3
 		
 	def update(self):
 		if self.facing == "down":
@@ -52,8 +53,11 @@ class Player:
 			self.rect.bottom = constants.SCREEN_HEIGHT
 		for asteroid in self.level.asteroid_list:
 			if self.rect.colliderect(asteroid.rect):
-				pygame.quit()
-				sys.exit()
+				self.lives -= 1
+				self.jump()
+		if self.lives <= 0:
+			pygame.quit()
+			sys.exit()
 		
 	def change_speed(self, x, y):
 		self.change_x += x
@@ -80,6 +84,7 @@ class Player:
 			self.rect.y = random.randint(0, constants.SCREEN_HEIGHT - self.rect.height)
 			for asteroid in self.level.asteroid_list:
 				if self.rect.colliderect(asteroid.rect):
-					continue
-				else:
 					break
+				else:
+					return None
+			continue

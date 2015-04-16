@@ -16,7 +16,6 @@ def update_screen():
 def main():
 	global screen, current_level, player
 	screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
-	pygame.display.set_caption("Asteroids")
 	clock = pygame.time.Clock()
 	
 	player = Player(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
@@ -26,6 +25,7 @@ def main():
 	player.level = current_level
 	
 	while True:
+		pygame.display.set_caption("Asteroids | Lives: " + str(player.lives))
 		update_screen()
 		'''
 		screen.fill(constants.BLACK)
@@ -42,6 +42,8 @@ def main():
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_SPACE:
 					player.shoot()
+				elif event.key == pygame.K_LCTRL:
+					player.jump()
 		player.change_x = 0
 		player.change_y = 0
 		pressed = pygame.key.get_pressed()
