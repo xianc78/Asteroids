@@ -1,6 +1,7 @@
 import pygame, sys, random
 import constants
 import levels
+import text
 from asteroid import Asteroid
 from player import Player
 pygame.init()
@@ -12,11 +13,27 @@ def update_screen():
 	screen.blit(player.image, (player.rect.x, player.rect.y))
 	for asteroid in current_level.asteroid_list:
 		screen.blit(asteroid.image, (asteroid.rect.x, asteroid.rect.y))
+		
+def titleScreen():
+	global screen
+	titleText = text.titleText()
+	screen.fill(constants.BLACK)
+	screen.blit(titleText.text, titleText.rect)
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == pygame.KEYDOWN:
+				return None
+		pygame.display.update()
 
 def main():
 	global screen, current_level, player
 	screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 	clock = pygame.time.Clock()
+	
+	titleScreen()
 	
 	player = Player(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
 	level_list = [levels.level1, levels.level2]
