@@ -27,6 +27,19 @@ def titleScreen():
 			elif event.type == pygame.KEYDOWN:
 				return None
 		pygame.display.update()
+		
+def pause():
+	global screen
+	pauseText = text.pauseText()
+	screen.blit(pauseText.text, pauseText.rect)
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+			elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+				return None
+		pygame.display.update()
 
 def main():
 	global screen, current_level, player
@@ -61,6 +74,8 @@ def main():
 					player.shoot()
 				elif event.key == pygame.K_LCTRL:
 					player.jump()
+				elif event.key == pygame.K_ESCAPE:
+					pause()
 		player.change_x = 0
 		player.change_y = 0
 		pressed = pygame.key.get_pressed()
