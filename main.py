@@ -40,6 +40,12 @@ def pause():
 			elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
 				return None
 		pygame.display.update()
+		
+def levelClear():
+	levelText = text.levelComplete()
+	screen.blit(levelText.text, levelText.rect)
+	pygame.display.update()
+	pygame.time.wait(500)
 
 def main():
 	global screen, current_level, player
@@ -118,9 +124,10 @@ def main():
 		for bullet in current_level.bullet_list:
 			bullet.update()
 		if len(current_level.asteroid_list) == 0:
-			levelno += 1
 			update_screen()
 			pygame.display.update()
+			levelClear()
+			levelno += 1
 			if levelno > len(level_list):
 				pygame.quit()
 				sys.exit()

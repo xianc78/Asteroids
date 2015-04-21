@@ -28,4 +28,6 @@ class levelComplete(textObj):
 		
 class gameOver(textObj):
 	def __init__(self):
-		pass
+		self.text = self.font.render("Game Over", True, constants.WHITE)
+		self.rect = self.text.get_rect()
+		self.rect.center = (constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
