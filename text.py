@@ -18,6 +18,19 @@ class pauseText(textObj):
 		self.rect = self.text.get_rect()
 		self.rect.center = (constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
 		
+class lifeCounter(textObj):
+	def __init__(self):
+		self.text = self.font.render("Life: ", True, constants.WHITE)
+		self.rect = self.text.get_rect()
+		self.rect.x = 0
+		self.rect.y = 0
+
+class scoreCounter(textObj):
+	def __init__(self):
+		self.text = self.font.render("Score: ", True, constants.WHITE)
+		self.rect = self.text.get_rect()
+		self.rect.topright = (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+		
 # Work on these later.		
 		
 class levelComplete(textObj):

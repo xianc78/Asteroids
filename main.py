@@ -7,12 +7,14 @@ from player import Player
 pygame.init()
 
 def update_screen():
+	global lifeCounter
 	screen.fill(constants.BLACK)
 	for bullet in current_level.bullet_list:
 		screen.blit(bullet.image, (bullet.rect.x, bullet.rect.y))
 	screen.blit(player.image, (player.rect.x, player.rect.y))
 	for asteroid in current_level.asteroid_list:
 		screen.blit(asteroid.image, (asteroid.rect.x, asteroid.rect.y))
+	screen.blit(lifeCounter.text, lifeCounter.rect)
 		
 def titleScreen():
 	global screen
@@ -48,9 +50,10 @@ def levelClear():
 	pygame.time.wait(500)
 
 def main():
-	global screen, current_level, player
+	global screen, current_level, player, lifeCounter
 	screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 	clock = pygame.time.Clock()
+	lifeCounter = text.lifeCounter()
 	
 	titleScreen()
 	
@@ -61,7 +64,8 @@ def main():
 	player.level = current_level
 	
 	while True:
-		pygame.display.set_caption("Asteroids | Lives: " + str(player.lives))
+		pygame.display.set_caption("Asteroids")
+		lifeCounter.text = lifeCounter.font.render("Life: " + str(player.lives), True, constants.WHITE)
 		update_screen()
 		'''
 		screen.fill(constants.BLACK)

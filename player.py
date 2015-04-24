@@ -3,6 +3,8 @@ import constants
 from bullet import Bullet
 pygame.init()
 
+laserSound = pygame.mixer.Sound("resources/laser.wav")
+
 class Player:
 	def __init__(self, x, y):
 		self.facing = "up"
@@ -31,6 +33,7 @@ class Player:
 		self.change_x = 0
 		self.change_y = 0
 		self.lives = 3
+		self.score = 0
 		
 	def update(self):
 		if self.facing == "down":
@@ -76,6 +79,7 @@ class Player:
 		elif self.facing == "right":
 			change_x = 8
 			change_y = 0
+		laserSound.play()
 		self.level.bullet_list.append(Bullet(self.rect.centerx, self.rect.centery, change_x, change_y, self.level))
 	
 	def jump(self):
