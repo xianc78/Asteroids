@@ -29,7 +29,7 @@ class scoreCounter(textObj):
 	def __init__(self):
 		self.text = self.font.render("Score: ", True, constants.WHITE)
 		self.rect = self.text.get_rect()
-		self.rect.topright = (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+		self.rect.bottomleft = (0, constants.SCREEN_HEIGHT)
 		
 # Work on these later.		
 		

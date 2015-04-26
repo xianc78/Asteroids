@@ -7,6 +7,7 @@ class level:
 	player = None
 	asteroid_list = []
 	bullet_list = []
+	explosion_list = []
 	
 	def __init__(self, player):
 		self.player = player
